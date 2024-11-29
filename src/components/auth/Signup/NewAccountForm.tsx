@@ -90,7 +90,7 @@ export const NewAccountForm = () => {
 
 				{error && (
 					<div
-						className="border border-red-500 rounded-md p-2 flex items-center space-x-2 bg-red-50"
+						className="rounded-lg border bg-destructive/10 p-2 text-[0.8rem] font-medium text-destructive"
 						aria-live="polite"
 						aria-atomic="true"
 					>
