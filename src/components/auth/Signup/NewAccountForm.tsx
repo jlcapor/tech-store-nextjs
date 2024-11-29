@@ -1,112 +1,115 @@
 'use client';
 
 import * as React from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { signupAction } from '@/lib/actions/auth-action';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { SignupInput, signupSchema } from '@/lib/validations/auth';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { PasswordInput } from '@/components/password-input';
-import { SubmitButton } from '@/components/submit-button';
 import Link from 'next/link';
-import { signIn } from 'next-auth/react';
+import { Button } from '@/components/ui/button';
 import { Icons } from '@/components/icons';
-import { signup } from '@/lib/actions/auth';
+import { CircleAlert } from 'lucide-react';
 
 export const NewAccountForm = () => {
-  const [isGoogleLoading, setIsGoogleLoading] = React.useState<boolean>(false);
-  const [state, formAction] = React.useActionState(signup, undefined);
+	const [error, setError] = React.useState<string | null>(null);
+	const [isPending, startTransition] = React.useTransition();
+	const router = useRouter();
+  
+	const form = useForm<z.infer<typeof signupSchema>>({
+	  resolver: zodResolver(signupSchema),
+	  defaultValues: {
+		  name: "",
+		  email: "",
+		  password: "",
+	  },
+	});
+
+	async function onSubmit(values: SignupInput) {
+		setError(null);
+		startTransition(async () => {
+			const response = await signupAction(values);
+			if (response.error) {
+				setError(response.error);
+			} else {
+				router.push('/verify-email');
+			}
+		});
+	}
 	return (
-		<Card className="w-full max-w-md">
-			<CardHeader className="text-center">
-				<CardTitle className="text-2xl font-semibold tracking-tight">Crear cuenta</CardTitle>
-			</CardHeader>
-			<CardContent>
-				<Button
-					variant="outline"
-					className="w-full"
-					onClick={() => {
-						setIsGoogleLoading(true);
-						signIn('google');
-					}}
-					disabled={isGoogleLoading}
-				>
-					{isGoogleLoading ? (
-						<Icons.spinner className="mr-2 size-4 animate-spin" />
-					) : (
-						<Icons.google className="mr-2 size-4" />
-					)}{' '}
-					Google
-				</Button>
-				<div className="my-2 flex items-center">
-					<div className="flex-grow border-t border-muted" />
-					<div className="mx-2 text-muted-foreground">O</div>
-					<div className="flex-grow border-t border-muted" />
+		<Form {...form}>
+			<form className="grid gap-4" onSubmit={form.handleSubmit(onSubmit)}>
+				<FormField
+					control={form.control}
+					name="name"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Tu nombre</FormLabel>
+							<FormControl>
+								<Input type="text" placeholder="Nombres y apellidos" {...field} />
+							</FormControl>
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="email"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Correo electrónico</FormLabel>
+							<FormControl>
+								<Input type="email" placeholder="Correo electrónico" {...field} />
+							</FormControl>
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="password"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Contraseña</FormLabel>
+							<FormControl>
+								<PasswordInput placeholder="**********" {...field} />
+							</FormControl>
+						</FormItem>
+					)}
+				/>
+
+				<div>
+					<Link href={'/login'}>
+						<span className="p-0 text-xs font-medium underline-offset-4 hover:underline">
+							¿Ya tienes cuenta? Iniciar Sesión
+						</span>
+					</Link>
 				</div>
-				<form action={formAction} className="space-y-4">
-					<div className="space-y-2">
-						<Label htmlFor="name">Tu nombre</Label>
-						<Input
-							id="name"
-							required
-							placeholder="Nombres y apellidos"
-							autoComplete="name"
-							name="name"
-							type="text"
-						/>
-					</div>
-					<div className="space-y-2">
-						<Label htmlFor="email">Email</Label>
-						<Input
-							id="email"
-							required
-							placeholder="email@example.com"
-							autoComplete="email"
-							name="email"
-							type="email"
-						/>
-					</div>
 
-					<div className="space-y-2">
-						<Label htmlFor="password">Password</Label>
-						<PasswordInput
-							id="password"
-							name="password"
-							required
-							autoComplete="current-password"
-							placeholder="********"
-						/>
+				{error && (
+					<div
+						className="border border-red-500 rounded-md p-2 flex items-center space-x-2 bg-red-50"
+						aria-live="polite"
+						aria-atomic="true"
+					>
+						<>
+							<CircleAlert className="h-5 w-5 text-red-500" />
+							<FormMessage>{error}</FormMessage>
+						</>
 					</div>
+				)}
 
-					{state?.fieldError ? (
-						<ul className="list-disc space-y-1 rounded-lg border bg-destructive/10 p-2 text-[0.8rem] font-medium text-destructive">
-						{Object.values(state.fieldError).map((err) => (
-							<li className="ml-4" key={err}>
-								{err}
-							</li>
-						))}
-						</ul>
-					) : state?.formError ? (
-						<p className="rounded-lg border bg-destructive/10 p-2 text-[0.8rem] font-medium text-destructive">
-							{state?.formError}
-						</p>
-					) : null}
-
-					<div>
-						<Link href={'/login'}>
-							<span className="p-0 text-xs font-medium underline-offset-4 hover:underline">
-                				¿Ya tienes cuenta? Iniciar Sesión
-							</span>
-						</Link>
-					</div>
-
-					<SubmitButton className="w-full" aria-label="submit-btn">
-            			Crear cuenta
-					</SubmitButton>
-					<Button variant="outline" className="w-full" asChild>
-						<Link href="/">Cancelar</Link>
-					</Button>
-				</form>
-			</CardContent>
-		</Card>
+				<Button type="submit" className="mt-2" disabled={isPending}>
+					{isPending && <Icons.spinner className="mr-2 size-4 animate-spin" aria-hidden="true" />}
+					Crear cuenta
+					<span className="sr-only">Crear cuenta</span>
+				</Button>
+				<Button variant="outline" className="w-full" asChild>
+					<Link href="/">Cancelar</Link>
+				</Button>
+			</form>
+		</Form>
 	);
 };

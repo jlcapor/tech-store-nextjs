@@ -37,7 +37,7 @@ export default async function AuthDropdown() {
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                     <DropdownMenuItem asChild>
-                        <Link href="/account" className="flex items-center space-x-2.5">
+                        <Link href="/my-account" className="flex items-center space-x-2.5">
                             <Icons.user className="size-5" />
                             <p className="text-sm">Perfil</p>
                         </Link>

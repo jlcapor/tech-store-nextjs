@@ -1,8 +1,4 @@
-import {
-	EyeOff,
-	Eye,
-	User
-} from 'lucide-react';
+import { EyeOff, Eye, User } from 'lucide-react';
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 export const Icons = {

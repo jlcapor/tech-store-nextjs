@@ -12,23 +12,13 @@ import {
   users,
   verificationTokens,
 } from "@/server/db/schema";
-import { z } from "zod";
 import { env } from "@/env";
 import bcrypt from 'bcrypt';
+import { loginSchema } from "@/lib/validations/auth";
 
-export const Credentials = z.object({
-  email: z.string().email(),
-  password: z.string().min(1),
-});
 
 export type UserRoleType = 'ADMIN' | 'USER';
 
-/**
- * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
- * object and keep type safety.
- *
- * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
- */
 declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
@@ -46,11 +36,7 @@ declare module "next-auth" {
   }
 }
 
-/**
- * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
- *
- * @see https://next-auth.js.org/configuration/options
- */
+
 export const authConfig = {
   providers: [
     GoogleProvider({
@@ -58,45 +44,30 @@ export const authConfig = {
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
     CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
-      },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          throw new Error('Correo electrónico o contraseña incorrectos');
+        const { data, success } = loginSchema.safeParse(credentials);
+        if (!success) {
+          throw new Error("Invalid credentials");
         }
 
         const user = await db.query.users.findFirst({
-          where: (users, { eq }) => eq(users.email, String(credentials.email)),
+          where: (users, { eq }) => eq(users.email, String(data.email)),
         });
 
         if (!user || !user?.password) { 
-          throw new Error('Correo electrónico o contraseña incorrectos');
+          throw new Error("No se encontró ningún usuario");
         }
 
-        const isCorrectPassword = await bcrypt.compare(
-          credentials.password as string,
-          user.password
-        );
+        const isCorrectPassword = await bcrypt.compare(data.password,user.password);
 
         if (!isCorrectPassword) {
-          throw new Error('Correo electrónico o contraseña incorrectos');
+          throw new Error("Incorrect password");
         }
 
         return user
       }
     })
-    /**
-     * ...add more providers here.
-     *
-     * Most other providers require a bit more work than the Discord provider. For example, the
-     * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
-     * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
-     *
-     * @see https://next-auth.js.org/providers/github
-     */
+    
   ],
   adapter: DrizzleAdapter(db, {
     usersTable: users,
@@ -107,7 +78,7 @@ export const authConfig = {
   callbacks: {
     session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id as string;
+        session.user.id = token.sub as string;
         session.user.role = token.role;
       }
       return session;

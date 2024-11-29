@@ -3,100 +3,108 @@
 import * as React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import Link from 'next/link';
-import { PasswordInput } from '@/components/password-input';
-import { SubmitButton } from '@/components/submit-button';
 import { Icons } from '@/components/icons';
 import { signIn } from 'next-auth/react';
-import { authenticate } from '@/lib/actions/auth';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
+import { z } from 'zod';
+import { LoginInput, loginSchema } from '@/lib/validations/auth';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { PasswordInput } from '@/components/password-input';
+import Link from 'next/link';
+import { authenticateAction } from '@/lib/actions/auth-action';
 import { CircleAlert } from 'lucide-react';
+import { OAuthSignIn } from '../OAuthSignIn';
 
 export const LoginForm = () => {
-	const [isGoogleLoading, setIsGoogleLoading] = React.useState<boolean>(false);
-	const [ errorMessage, formAction ] = React.useActionState(authenticate, undefined);
+	const [ isGoogleLoading, setIsGoogleLoading ] = React.useState<boolean>(false);
 
+	const [error, setError] = React.useState<string | null>(null);
+  	const [isPending, startTransition] = React.useTransition();
+  	const router = useRouter();
+
+  	const form = useForm<z.infer<typeof loginSchema>>({
+		resolver: zodResolver(loginSchema),
+			defaultValues: {
+			email: "",
+			password: "",
+		},
+  	});
+
+	async function onSubmit(values: LoginInput) {
+		startTransition(async () => {
+			const response = await authenticateAction(values);
+			if (response.error) {
+				setError(response.error);
+			} else {
+				router.push('/');
+			}
+		});
+	}
 	return (
-		<Card className="w-full max-w-md">
-			<CardHeader className="text-center mt-3">
-				<CardTitle className="text-2xl font-bold">Iniciar Sesión</CardTitle>
-				<CardDescription>Inicia sesión para gestionar tus pedidos</CardDescription>
-			</CardHeader>
-			<CardContent>
-				<Button
-					variant="outline"
-					className="w-full"
-					onClick={() => {
-						setIsGoogleLoading(true);
-						signIn('google');
-					}}
-					disabled={isGoogleLoading}
-				>
-					{isGoogleLoading ? (
-						<Icons.spinner className="mr-2 size-4 animate-spin" />
-					) : (
-						<Icons.google className="mr-2 size-4" />
-					)}{' '}
-					Google
-				</Button>
-				<div className="my-2 flex items-center">
-					<div className="flex-grow border-t border-muted" />
-					<div className="mx-2 text-muted-foreground">O</div>
-					<div className="flex-grow border-t border-muted" />
-				</div>
-				<form action={formAction} className="grid gap-4">
-					<div className="space-y-2">
-						<Label htmlFor="email">Email</Label>
-						<Input
-							required
-							id="email"
-							placeholder="email@example.com"
-							autoComplete="email"
-							name="email"
-							type="email"
-						/>
-					</div>
-					<div className="space-y-2">
-						<Label htmlFor="password">Password</Label>
-						<PasswordInput
-							id="password"
-							name="password"
-							// required
-							autoComplete="current-password"
-							placeholder="********"
-						/>
-					</div>
+		<Form {...form}>
+			<form className="grid gap-4" onSubmit={form.handleSubmit(onSubmit)}>
+				<FormField
+					control={form.control}
+					name="email"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Email</FormLabel>
+							<FormControl>
+								<Input placeholder="email" type="email" {...field} />
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
 
-						{errorMessage && (
-							<div 
-								className="flex h-8 items-end space-x-1"
-								aria-live="polite"
-								aria-atomic="true"
-							>
-								<>
-									<CircleAlert className="h-5 w-5 text-red-500" />
-									<p className="text-sm text-red-500">{errorMessage}</p>
-								</>
-							</div>
-						)}
+				<FormField
+					control={form.control}
+					name="password"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Password</FormLabel>
+							<FormControl>
+								<PasswordInput placeholder="**********" {...field} />
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
 
-					<div className="flex flex-wrap justify-between">
-						<Button variant={'link'} size={'sm'} className="p-0" asChild>
-							<Link href={'/signup'}>¿No tienes cuenta? Crear Una</Link>
-						</Button>
-						<Button variant={'link'} size={'sm'} className="p-0" asChild>
-							<Link href={'/reset-password'}>¿Olvidaste tu contraseña?</Link>
-						</Button>
-					</div>
-					<SubmitButton className="mt-4 w-full" aria-label="submit-btn">
-						Iniciar Sesión
-					</SubmitButton>
-					<Button variant="outline" className="w-full" asChild>
-						<Link href="/">Cancelar</Link>
+				<div className="flex flex-wrap justify-between">
+					<Button variant={'link'} size={'sm'} className="p-0" asChild>
+						<Link href={'/signup'}>¿No tienes cuenta? Crear Una</Link>
 					</Button>
-				</form>
-			</CardContent>
-		</Card>
+					<Button variant={'link'} size={'sm'} className="p-0" asChild>
+						<Link href={'/reset-password'}>¿Olvidaste tu contraseña?</Link>
+					</Button>
+				</div>
+
+				{error && (
+					<div
+						className="border border-red-500 rounded-md p-2 flex items-center space-x-2 bg-red-50"
+						aria-live="polite"
+						aria-atomic="true"
+					>
+						<div>
+							<CircleAlert className="h-5 w-5 text-red-500" />
+							<FormMessage>{error}</FormMessage>
+						</div>
+					</div>
+				)}
+				<Button type="submit" className="mt-2" disabled={isPending}>
+					{isPending && <Icons.spinner className="mr-2 size-4 animate-spin" aria-hidden="true" />}
+					Iniciar Sesión
+					<span className="sr-only">Iniciar Sesión</span>
+				</Button>
+
+				<Button variant="outline" className="w-full" asChild>
+					<Link href="/">Cancelar</Link>
+				</Button>
+			</form>
+		</Form>
 	);
 };

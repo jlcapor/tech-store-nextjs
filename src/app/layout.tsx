@@ -1,12 +1,11 @@
 import '@/styles/globals.css';
 
 import { GeistSans } from 'geist/font/sans';
-import { type Metadata } from 'next';
+import { GeistMono } from 'geist/font/mono';
+import { fontHeading } from '@/lib/fonts';
 
 import { TRPCReactProvider } from '@/trpc/react';
 import SessionWrapper from '../components/session-wrapper';
-import { GeistMono } from 'geist/font/mono';
-import { fontHeading } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
 
 // export const metadata: Metadata = {

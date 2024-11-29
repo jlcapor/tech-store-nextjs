@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { signIn, signOut } from '@/server/auth';
+import { signOut } from '@/server/auth';
 import { LogIn } from 'lucide-react';
 import Link from 'next/link';
 
