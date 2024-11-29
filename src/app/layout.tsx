@@ -5,7 +5,6 @@ import { GeistMono } from 'geist/font/mono';
 import { fontHeading } from '@/lib/fonts';
 
 import { TRPCReactProvider } from '@/trpc/react';
-import SessionWrapper from '../components/session-wrapper';
 import { cn } from '@/lib/utils';
 
 // export const metadata: Metadata = {
@@ -25,11 +24,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 					fontHeading.variable
 				)}
 			>
-				<SessionWrapper>
+				
 					<TRPCReactProvider>
 						<div className="relative flex min-h-screen flex-col bg-background">{children}</div>
 					</TRPCReactProvider>
-				</SessionWrapper>
 			</body>
 		</html>
 	);
