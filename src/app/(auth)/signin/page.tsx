@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 	description: 'Sign in to your account',
 };
 
-export default async function LoginPage() {
+export default async function SignInPage() {
 	return (
 		<Card className="w-full max-w-md">
 			<CardHeader className="text-center mt-3">

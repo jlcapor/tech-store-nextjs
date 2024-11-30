@@ -1,22 +1,23 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { auth } from '@/server/auth';
-import { SignIn, SignOut } from './AuthActions';
+import {SignOut } from './AuthActions';
 import Link from 'next/link';
 import { Icons } from '@/components/icons';
+import { Session } from 'next-auth';
 
-export default async function AuthDropdown() {
-	const session = await auth();
-	if (!session?.user) return <SignIn />
+interface AuthDropdownProps {
+    session: Session,
+}
 
-	const initials = `${session?.user.name?.charAt(0) ?? ""}`
+export default async function AuthDropdown({ session }: AuthDropdownProps) {
+	const initials = `${session.user.name?.charAt(0) ?? ""}`
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button variant="secondary" className="relative h-8 w-8 rounded-full">
 					<Avatar className="size-9">
-						<AvatarImage src={session.user.image ?? ""} alt={session.user.name ?? ""} />
+						<AvatarImage src={session.user.image ?? ""} alt={session?.user.name ?? ""} />
 						<AvatarFallback>{initials}</AvatarFallback>
 					</Avatar>
 				</Button>

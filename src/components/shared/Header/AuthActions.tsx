@@ -1,19 +1,16 @@
 import { Button } from '@/components/ui/button';
-import { signOut } from '@/server/auth';
-import { LogIn } from 'lucide-react';
-import Link from 'next/link';
-import { cn } from '@/lib/utils';
+import { auth, signOut } from '@/server/auth';
+import AuthDropdown from './AuthDropdown';
+import AuthOptions from './AuthOptions';
 
-export function SignIn({ className, ...props }: { provider?: string } & React.ComponentPropsWithRef<typeof Button>) {
-	return (
-		<Button size="sm" className={cn(className)} {...props} asChild>
-			<Link href="/login">
-				<LogIn className="h-5 w-5 " />
-				Acceder
-				<span className="sr-only">Acceder</span>
-			</Link>
-		</Button>
-	);
+export async function  AuthActions() {
+	const session = await auth();
+
+  return session?.user ? (
+    <AuthDropdown session={session} />
+  ) : (
+    <AuthOptions />
+  );
 }
 
 export function SignOut(props: React.ComponentPropsWithRef<typeof Button>) {

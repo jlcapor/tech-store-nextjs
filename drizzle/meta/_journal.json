@@ -15,6 +15,20 @@
       "when": 1732681527104,
       "tag": "0001_lively_toad_men",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1732933026409,
+      "tag": "0002_damp_viper",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1732934268332,
+      "tag": "0003_handy_lilandra",
+      "breakpoints": true
     }
   ]
 }
