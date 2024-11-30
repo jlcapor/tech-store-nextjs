@@ -2,9 +2,7 @@
 
 import * as React from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Icons } from '@/components/icons';
-import { signIn } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
@@ -12,20 +10,18 @@ import { z } from 'zod';
 import { LoginInput, loginSchema } from '@/lib/validations/auth';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { PasswordInput } from '@/components/password-input';
+import { PasswordInput } from '@/components/ui/password-input';
 import Link from 'next/link';
 import { authenticateAction } from '@/lib/actions/auth-action';
 import { CircleAlert } from 'lucide-react';
-import { OAuthSignIn } from '../OAuthSignIn';
 
-export const LoginForm = () => {
-	const [ isGoogleLoading, setIsGoogleLoading ] = React.useState<boolean>(false);
+export const SignInForm = () => {
 
 	const [error, setError] = React.useState<string | null>(null);
   	const [isPending, startTransition] = React.useTransition();
   	const router = useRouter();
 
-  	const form = useForm<z.infer<typeof loginSchema>>({
+  	const loginForm = useForm<z.infer<typeof loginSchema>>({
 		resolver: zodResolver(loginSchema),
 			defaultValues: {
 			email: "",
@@ -44,10 +40,15 @@ export const LoginForm = () => {
 		});
 	}
 	return (
-		<Form {...form}>
-			<form className="grid gap-4" onSubmit={form.handleSubmit(onSubmit)}>
+		<Form {...loginForm}>
+			<form 
+				className="grid gap-4" 
+				onSubmit={(...args) =>
+					void loginForm.handleSubmit(onSubmit)(...args)
+				}
+			>
 				<FormField
-					control={form.control}
+					control={loginForm.control}
 					name="email"
 					render={({ field }) => (
 						<FormItem>
@@ -61,7 +62,7 @@ export const LoginForm = () => {
 				/>
 
 				<FormField
-					control={form.control}
+					control={loginForm.control}
 					name="password"
 					render={({ field }) => (
 						<FormItem>
@@ -85,7 +86,7 @@ export const LoginForm = () => {
 
 				{error && (
 					<div
-						className="rounded-lg border bg-destructive/10 p-2 text-[0.8rem] font-medium text-destructive"
+						className="rounded-lg border bg-destructive/10  text-[0.8rem] font-medium text-destructive p-2 flex items-center space-x-2"
 						aria-live="polite"
 						aria-atomic="true"
 					>

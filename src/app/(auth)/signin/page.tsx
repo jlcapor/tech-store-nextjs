@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { LoginForm } from '@/components/auth/Login';
+import { SignInForm } from '@/components/auth/SignIn';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { OAuthSignIn } from '@/components/auth/OAuthSignIn';
 
@@ -24,7 +24,7 @@ export default async function LoginPage() {
 					</div>
 					<div className="flex-grow border-t border-muted" />
 				</div>
-				<LoginForm />
+				<SignInForm />
 			</CardContent>
 		</Card>
 	);

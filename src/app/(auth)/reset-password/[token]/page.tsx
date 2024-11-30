@@ -1,3 +1,4 @@
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 
 export const metadata = {
@@ -10,5 +11,15 @@ export default function ResetPasswordPage({
   }: {
     params: { token: string };
   }) {
-	return <div />;
-}
+    return (
+      <Card className="w-full max-w-md">
+        <CardHeader className="space-y-1">
+          <CardTitle>Reset password</CardTitle>
+          <CardDescription>Enter new password.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          
+        </CardContent>
+      </Card>
+    );
+  }

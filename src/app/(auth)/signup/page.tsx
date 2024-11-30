@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { NewAccountForm } from '@/components/auth/Signup';
+import { SignUpForm } from '@/components/auth/SignUp';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ export default function SignupPage() {
 				<CardTitle className="text-2xl font-semibold tracking-tight">Crear cuenta</CardTitle>
 			</CardHeader>
 			<CardContent>
-				<NewAccountForm />
+				<SignUpForm />
 			</CardContent>
 		</Card>
 	);

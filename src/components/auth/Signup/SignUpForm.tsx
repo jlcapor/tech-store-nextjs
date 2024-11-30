@@ -9,18 +9,18 @@ import { SignupInput, signupSchema } from '@/lib/validations/auth';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
-import { PasswordInput } from '@/components/password-input';
+import { PasswordInput } from '@/components/ui/password-input';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Icons } from '@/components/icons';
 import { CircleAlert } from 'lucide-react';
 
-export const NewAccountForm = () => {
+export const SignUpForm = () => {
 	const [error, setError] = React.useState<string | null>(null);
 	const [isPending, startTransition] = React.useTransition();
 	const router = useRouter();
   
-	const form = useForm<z.infer<typeof signupSchema>>({
+	const registerForm = useForm<z.infer<typeof signupSchema>>({
 	  resolver: zodResolver(signupSchema),
 	  defaultValues: {
 		  name: "",
@@ -41,10 +41,15 @@ export const NewAccountForm = () => {
 		});
 	}
 	return (
-		<Form {...form}>
-			<form className="grid gap-4" onSubmit={form.handleSubmit(onSubmit)}>
+		<Form {...registerForm}>
+			<form
+				className='grid gap-4'
+				onSubmit={(...args) =>
+					void registerForm.handleSubmit(onSubmit)(...args)
+				}
+			>
 				<FormField
-					control={form.control}
+					control={registerForm.control}
 					name="name"
 					render={({ field }) => (
 						<FormItem>
@@ -56,7 +61,7 @@ export const NewAccountForm = () => {
 					)}
 				/>
 				<FormField
-					control={form.control}
+					control={registerForm.control}
 					name="email"
 					render={({ field }) => (
 						<FormItem>
@@ -68,7 +73,7 @@ export const NewAccountForm = () => {
 					)}
 				/>
 				<FormField
-					control={form.control}
+					control={registerForm.control}
 					name="password"
 					render={({ field }) => (
 						<FormItem>
@@ -81,7 +86,7 @@ export const NewAccountForm = () => {
 				/>
 
 				<div>
-					<Link href={'/login'}>
+					<Link href={'/signin'}>
 						<span className="p-0 text-xs font-medium underline-offset-4 hover:underline">
 							¿Ya tienes cuenta? Iniciar Sesión
 						</span>
@@ -90,7 +95,7 @@ export const NewAccountForm = () => {
 
 				{error && (
 					<div
-						className="rounded-lg border bg-destructive/10 p-2 text-[0.8rem] font-medium text-destructive"
+						className="rounded-lg border bg-destructive/10  text-[0.8rem] font-medium text-destructive p-2 flex items-center space-x-2"
 						aria-live="polite"
 						aria-atomic="true"
 					>
@@ -113,3 +118,6 @@ export const NewAccountForm = () => {
 		</Form>
 	);
 };
+
+
+///https://getnextjsthemes.com/product/jazila-bazar

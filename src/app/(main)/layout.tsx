@@ -1,5 +1,5 @@
-import { Footer } from "@/components/layouts/Footer";
-import { Header } from "@/components/layouts/Header";
+import { Footer } from "@/components/shared/Footer";
+import { Header } from "@/components/shared/Header";
 
 export default async function TechStoreLayout({ children }: { children: React.ReactNode }) {
 	return (
