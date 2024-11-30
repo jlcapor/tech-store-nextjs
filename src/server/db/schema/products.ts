@@ -1,6 +1,15 @@
 import type { ProductFile } from '@/types';
 import { relations } from 'drizzle-orm';
-import { decimal, index, integer, json, pgEnum, pgTable, text, varchar } from 'drizzle-orm/pg-core';
+import { 
+	decimal, 
+	index, 
+	integer, 
+	json, 
+	pgEnum, 
+	pgTable, 
+	text, 
+	varchar 
+} from 'drizzle-orm/pg-core';
 
 import { generateId } from '@/lib/id';
 

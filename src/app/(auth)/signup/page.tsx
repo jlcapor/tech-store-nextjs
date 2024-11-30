@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { SignUpForm } from '@/components/auth/SignUp';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { OAuthSignIn } from '@/components/auth/OAuthSignIn';
 
 export const metadata: Metadata = {
@@ -13,6 +13,7 @@ export default function SignUpPage() {
 		<Card className="w-full max-w-md">
 			<CardHeader className="text-center">
 				<CardTitle className="text-2xl font-semibold tracking-tight">Crear cuenta</CardTitle>
+				<CardDescription>Elija su método de registro preferido</CardDescription>
 			</CardHeader>
 			<CardContent>
 				<OAuthSignIn />

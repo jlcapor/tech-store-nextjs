@@ -8,7 +8,6 @@ export const Header = () => {
 				<nav className="flex items-center justify-between h-16">
 					<div className="flex items-center space-x-28">hfghfg</div>
 					<div className="flex items-center gap-4">
-						{/* <AuthDropdown/> */}
 						<AuthActions />
 						<ThemeToggler />
 					</div>

@@ -16,7 +16,7 @@ export default async function AuthDropdown({ session }: AuthDropdownProps) {
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button variant="secondary" className="relative h-8 w-8 rounded-full">
-					<Avatar className="size-9">
+					<Avatar className="size-8">
 						<AvatarImage src={session.user.image ?? ""} alt={session?.user.name ?? ""} />
 						<AvatarFallback>{initials}</AvatarFallback>
 					</Avatar>
