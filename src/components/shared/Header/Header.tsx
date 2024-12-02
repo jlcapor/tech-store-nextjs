@@ -1,4 +1,6 @@
-import { AuthActions } from './AuthActions';
+import ShoppingCart from '../ShoppingCart';
+import { AuthActions } from './AuthMenu/AuthActions';
+import { FavoritesButton } from './FavoritesButton';
 import ThemeToggler from './ThemeToggler';
 
 export const Header = () => {
@@ -8,6 +10,8 @@ export const Header = () => {
 				<nav className="flex items-center justify-between h-16">
 					<div className="flex items-center space-x-28">hfghfg</div>
 					<div className="flex items-center gap-4">
+						<FavoritesButton/>
+						<ShoppingCart/>
 						<AuthActions />
 						<ThemeToggler />
 					</div>

@@ -40,7 +40,13 @@ export default async function AuthDropdown({ session }: AuthDropdownProps) {
                     <DropdownMenuItem asChild>
                         <Link href="/my-account" className="flex items-center space-x-2.5">
                             <Icons.user className="size-5" />
-                            <p className="text-sm">Perfil</p>
+                            <p className="text-sm">Mi Perfil</p>
+                        </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                        <Link href="/favorites" className="flex items-center space-x-2.5">
+                            <Icons.favorites className="size-5" />
+                            <p className="text-sm">Mis Favoritos</p>
                         </Link>
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
