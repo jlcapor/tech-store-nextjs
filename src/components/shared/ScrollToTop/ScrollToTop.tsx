@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from 'react';
 
-export default function ScrollToTop() {
+import React from 'react'
+
+export const ScrollToTop = () => {
 	const [ isVisible, setIsVisible ] = useState(false);
 
-	// Top: 0 takes us all the way back to the top of the page
-	// Behavior: smooth keeps it smooth!
 	const scrollToTop = () => {
 		window.scrollTo({
 			top: 0,
@@ -43,3 +43,5 @@ export default function ScrollToTop() {
 		</div>
 	);
 }
+
+

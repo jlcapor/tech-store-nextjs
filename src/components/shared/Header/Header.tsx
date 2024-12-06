@@ -1,21 +1,22 @@
+import { Session } from 'next-auth';
 import ShoppingCart from '../ShoppingCart';
-import { AuthActions } from './AuthMenu/AuthActions';
-import { FavoritesButton } from './FavoritesButton';
-import ThemeToggler from './ThemeToggler';
+import AuthDropdown from './AuthDropdown';
 
-export const Header = () => {
+interface HeaderProps {
+	session: Session | null,
+}
+export const Header = ({ session }: HeaderProps) => {
 	return (
-		<header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:border-border">
-			<div className="relative mx-auto max-w-7xl px-6 2xl:px-0">
-				<nav className="flex items-center justify-between h-16">
-					<div className="flex items-center space-x-28">hfghfg</div>
-					<div className="flex items-center gap-4">
-						<FavoritesButton/>
-						<ShoppingCart/>
-						<AuthActions />
-						<ThemeToggler />
-					</div>
-				</nav>
+		<header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+			<div className="container flex h-16 items-center">
+				gdfdfg
+				<div className="flex flex-1 items-center justify-end space-x-4">
+					<div className="w-full flex-1 md:w-auto md:flex-none">wwwww</div>
+					<nav className="flex items-center space-x-4">
+						<ShoppingCart />
+						<AuthDropdown session={session} />
+					</nav>
+				</div>
 			</div>
 		</header>
 	);

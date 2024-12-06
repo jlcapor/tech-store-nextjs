@@ -7,7 +7,7 @@ import { fontHeading } from '@/lib/fonts';
 
 import { TRPCReactProvider } from '@/trpc/react';
 import { cn } from '@/lib/utils';
-import { Providers } from './providers';
+import { ThemeProvider } from '../components/providers';
 import { env } from '@/env';
 import { siteConfig } from '@/config/site';
 
@@ -22,8 +22,8 @@ export const metadata: Metadata = {
 	title: {
 		default: siteConfig.name,
 		template: `%s - ${siteConfig.name}`,
-	  },
-}
+	},
+};
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
 	return (
@@ -36,11 +36,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 					fontHeading.variable
 				)}
 			>
-				<Providers>
+				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
 					<TRPCReactProvider>
 						<div className="relative flex min-h-screen flex-col bg-background">{children}</div>
 					</TRPCReactProvider>
-				</Providers>
+				</ThemeProvider>
 			</body>
 		</html>
 	);
