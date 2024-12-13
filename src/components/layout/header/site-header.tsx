@@ -4,10 +4,10 @@ import MobileNav from '../mobile-nav/mobile-nav';
 import MainNav from '../main-nav/main-nav';
 import { SearchBar } from '../../SearchBar';
 import AuthDropdown from '../auth-dropdown/auth-dropdown';
-interface HeaderProps {
+interface SiteHeaderProps {
 	session: Session | null,
 }
-export const SiteHeader = ({ session }: HeaderProps) => {
+export const SiteHeader = ({ session }: SiteHeaderProps) => {
 	return (
 		<header className="animate-slide sticky top-0 z-50 w-full border-b bg-background">
 			<div className="container flex h-16 items-center px-4">
