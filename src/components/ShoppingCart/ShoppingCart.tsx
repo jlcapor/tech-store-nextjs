@@ -7,7 +7,7 @@ export default function ShoppingCart() {
 	return (
 		<Sheet>
 			<SheetTrigger asChild>
-				<Button aria-label="Open cart" variant="ghost" size="icon" className="relative">
+				<Button aria-label="Open cart" variant="outline" size="icon" className="relative">
 					<Icons.cart className="size-4" aria-hidden="true" />
 				</Button>
 			</SheetTrigger>

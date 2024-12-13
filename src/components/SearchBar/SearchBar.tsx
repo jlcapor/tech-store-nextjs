@@ -55,7 +55,7 @@ export const SearchBar: React.FC = () => {
           type="search"
           placeholder="Search for products..."
           autoComplete="off"
-          className="w-full pr-9 [&::-webkit-search-cancel-button]:p-1 [&::-webkit-search-cancel-button]:mr-2"
+          className="w-full rounded-md border border-neutral-300 bg-transparent bg-white px-4 py-2 pr-10 text-sm text-black placeholder:text-neutral-500  [&::-webkit-search-cancel-button]:p-1 [&::-webkit-search-cancel-button]:mr-2"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />

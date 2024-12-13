@@ -23,9 +23,9 @@ interface AuthDropdownProps extends React.ComponentPropsWithRef<typeof DropdownM
 export default async function AuthDropdown({ session, className, ...props }: AuthDropdownProps) {
   if (!session?.user) {
     return (
-      <Button size="sm" className={cn(className)} {...props} asChild>
+      <Button variant="outline" size="icon" className={cn(className)} {...props} asChild>
         <Link href="/signin">
-          Iniciar sesión
+          <Icons.user/>
           <span className="sr-only">Iniciar de Sesión</span>
         </Link>
       </Button>

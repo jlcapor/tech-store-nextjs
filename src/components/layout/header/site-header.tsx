@@ -1,13 +1,13 @@
 import { Session } from 'next-auth';
-import ShoppingCart from '../ShoppingCart';
-import AuthDropdown from './AuthDropdown';
-import MobileNav from './MobileNav';
-import MainNav from './MainNav';
-import { SearchBar } from '../SearchBar';
+import ShoppingCart from '../../ShoppingCart';
+import MobileNav from '../mobile-nav/mobile-nav';
+import MainNav from '../main-nav/main-nav';
+import { SearchBar } from '../../SearchBar';
+import AuthDropdown from '../auth-dropdown/auth-dropdown';
 interface HeaderProps {
 	session: Session | null,
 }
-export const Header = ({ session }: HeaderProps) => {
+export const SiteHeader = ({ session }: HeaderProps) => {
 	return (
 		<header className="animate-slide sticky top-0 z-50 w-full border-b bg-background">
 			<div className="container flex h-16 items-center px-4">

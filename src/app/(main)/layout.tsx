@@ -1,6 +1,6 @@
-import { Footer } from '@/components/shared/Footer';
-import { Header } from '@/components/shared/Header';
-import { ScrollToTop } from '@/components/shared/ScrollToTop';
+import { Footer } from '@/components/layout/footer';
+import { Header } from '@/components/layout/header';
+import { ScrollToTop } from '@/components/layout/ScrollToTop';
 import { auth } from '@/server/auth';
 
 export default async function TechStoreLayout({ children }: { children: React.ReactNode }) {

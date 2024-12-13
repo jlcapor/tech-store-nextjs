@@ -6,13 +6,11 @@ import React from 'react';
 export default function MainNav() {
 	return (
 		<div className="hidden gap-6 lg:flex">
-			<div className="flex items-center gap-2">
-				<MonitorSmartphone className="h-6 w-6" />
-				<Link href="/home" className="flex justify-center items-center gap-2 ml-0" title="Home">
-					<h1 className="text-xl font-bold m-0 mt-1">{siteConfig.name}</h1>
-				</Link>
+			<Link href="/" className="hidden items-center space-x-2 lg:flex">
+				<MonitorSmartphone className="size-7" aria-hidden="true" />
+				<span className="hidden text-xl font-bold lg:inline-block">{siteConfig.name}</span>
 				<span className="sr-only">Home</span>
-			</div>
+			</Link>
 		</div>
 	);
 }
