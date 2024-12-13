@@ -14,10 +14,12 @@ import { PasswordInput } from '@/components/ui/password-input';
 import Link from 'next/link';
 import { authenticateAction } from '@/lib/actions/auth-action';
 import { CircleAlert } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 export const SignInForm = () => {
 
 	const [error, setError] = React.useState<string | null>(null);
+	const [isSubmitted, setIsSubmitted] = React.useState(false)
   	const [isPending, startTransition] = React.useTransition();
   	const router = useRouter();
 
@@ -54,7 +56,17 @@ export const SignInForm = () => {
 						<FormItem>
 							<FormLabel>Email</FormLabel>
 							<FormControl>
-								<Input placeholder="email" type="email" {...field} />
+								<Input 
+									placeholder="email" 
+									type="email" 
+									{...field} 
+									className={cn(
+										"bg-background",
+										loginForm.formState.errors.email 
+										  ? "ring-red-500 focus:ring-red-500" 
+										  : "ring-input focus:ring-ring"
+									)}
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -68,7 +80,16 @@ export const SignInForm = () => {
 						<FormItem>
 							<FormLabel>Password</FormLabel>
 							<FormControl>
-								<PasswordInput placeholder="**********" {...field} />
+								<PasswordInput 
+									placeholder="**********" 
+									{...field} 
+									className={cn(
+										"bg-background",
+										loginForm.formState.errors.password 
+										  ? "ring-red-500 focus:ring-red-500" 
+										  : "ring-input focus:ring-ring"
+									)}
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>

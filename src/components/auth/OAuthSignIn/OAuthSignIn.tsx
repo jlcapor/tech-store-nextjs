@@ -5,7 +5,6 @@ import { signIn } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 
-// Proveedores de OAuth con nombre, estrategia y su ícono
 const oauthProviders = [
   { name: "Google", strategy: "google", icon: "google" },
   { name: "Github", strategy: "github", icon: "gitHub" },
@@ -56,3 +55,6 @@ export function OAuthSignIn() {
     </div>
   )
 }
+
+
+///https://pythontutor.com/java.html#mode=edit

@@ -14,6 +14,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Icons } from '@/components/icons';
 import { CircleAlert } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 export const SignUpForm = () => {
 	const [error, setError] = React.useState<string | null>(null);
@@ -55,7 +56,17 @@ export const SignUpForm = () => {
 						<FormItem>
 							<FormLabel>Tu nombre</FormLabel>
 							<FormControl>
-								<Input type="text" placeholder="Nombres y apellidos" {...field} />
+								<Input 
+									type="text" 
+									placeholder="Nombres y apellidos" 
+									{...field} 
+									className={cn(
+										"bg-background",
+										registerForm.formState.errors.name
+										  ? "ring-red-500 focus:ring-red-500" 
+										  : "ring-input focus:ring-ring"
+									)}
+								/>
 							</FormControl>
 						</FormItem>
 					)}
@@ -67,7 +78,17 @@ export const SignUpForm = () => {
 						<FormItem>
 							<FormLabel>Correo electrónico</FormLabel>
 							<FormControl>
-								<Input type="email" placeholder="Correo electrónico" {...field} />
+								<Input 
+									type="email" 
+									placeholder="Correo electrónico" 
+									{...field} 
+									className={cn(
+										"bg-background",
+										registerForm.formState.errors.email
+										  ? "ring-red-500 focus:ring-red-500" 
+										  : "ring-input focus:ring-ring"
+									)}
+								/>
 							</FormControl>
 						</FormItem>
 					)}
@@ -79,7 +100,16 @@ export const SignUpForm = () => {
 						<FormItem>
 							<FormLabel>Contraseña</FormLabel>
 							<FormControl>
-								<PasswordInput placeholder="**********" {...field} />
+								<PasswordInput 
+									placeholder="**********" 
+									{...field} 
+									className={cn(
+										"bg-background",
+										registerForm.formState.errors.password
+										  ? "ring-red-500 focus:ring-red-500" 
+										  : "ring-input focus:ring-ring"
+									)}
+								/>
 							</FormControl>
 						</FormItem>
 					)}
