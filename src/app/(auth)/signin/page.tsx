@@ -2,6 +2,9 @@ import { Metadata } from 'next';
 import { SignInForm } from '@/components/auth/SignIn';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { OAuthSignIn } from '@/components/auth/OAuthSignIn';
+import { auth } from '@/server/auth';
+import { redirect } from 'next/navigation';
+import { Paths } from '@/lib/constants';
 
 export const metadata: Metadata = {
 	title: 'Sign In',
@@ -9,6 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default async function SignInPage() {
+	const session = await auth();
+	if (session?.user) redirect(Paths.Home);
 	return (
 		<Card className="w-full max-w-md">
 			<CardHeader className="text-center mt-3">

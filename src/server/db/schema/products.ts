@@ -17,6 +17,7 @@ import { categories } from './categories';
 import { subcategories } from './subcategories';
 import { productTags } from './tags';
 import { productVariants } from './variants';
+import { orderItems } from './orderItems';
 
 export const productStatusEnum = pgEnum('product_status', [ 'active', 'draft', 'archived' ]);
 
@@ -65,6 +66,7 @@ export const productsRelations = relations(products, ({ one, many }) => ({
 	}),
 	variants: many(productVariants, { relationName: 'productVariants' }),
 	tags: many(productTags, { relationName: 'productTags' }),
+	ordersItems: many(orderItems, { relationName: 'orderProducts' })
 }));
 
 export type Product = typeof products.$inferSelect;

@@ -1,1 +1,3 @@
-export { Footer } from "./Footer";
+import { SiteFooter } from "./site-footer";
+
+export default SiteFooter;

@@ -7,10 +7,10 @@ import { fontHeading } from '@/lib/fonts';
 
 import { TRPCReactProvider } from '@/trpc/react';
 import { cn } from '@/lib/utils';
-import { ThemeProvider } from '../components/providers';
 import { env } from '@/env';
 import { siteConfig } from '@/config/site';
 import Providers from './Providers';
+import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
 	metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
@@ -33,14 +33,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 				)}
 			>
 				<Providers>
-					<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-						<TRPCReactProvider>
-							<div className="relative flex flex-col min-h-screen bg-background">
-								{children}
-							</div>
-						</TRPCReactProvider>
-					</ThemeProvider>
+					<TRPCReactProvider>
+						<div className="relative flex flex-col min-h-screen bg-background">
+							{children}
+						</div>
+					</TRPCReactProvider>
 				</Providers>
+				<Toaster />
 			</body>
 		</html>
 	);

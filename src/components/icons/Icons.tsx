@@ -1,4 +1,13 @@
-import { EyeOff, Eye, User } from 'lucide-react';
+import { 
+	EyeOff, 
+	Eye, 
+	User,
+	Settings,
+	LogOut,
+	LayoutDashboard,
+	Box  
+} from 'lucide-react';
+
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 export const Icons = {
@@ -96,4 +105,8 @@ export const Icons = {
 	hide: EyeOff,
 	view: Eye,
 	user: User,
+	settings : Settings,
+	logout: LogOut,
+	dashboard: LayoutDashboard,
+	cube: Box
 };

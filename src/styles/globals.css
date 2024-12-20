@@ -24,6 +24,14 @@
     --input: 240 5.9% 90%;
     --ring: 240 5.9% 10%;
     --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
@@ -46,6 +54,14 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -57,6 +73,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+
 
 @layer components {
   .zoom-image [data-rmiz-modal-overlay="visible"] {
@@ -71,5 +90,16 @@
 @media (max-width: 640px) {
   .container {
     @apply px-4;
+    /* @apply max-w-[1440px] w-full mx-auto px-6; */
   }
+
 }
+
+.dropdown-active {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+.menu-item {
+  @apply m-2 cursor-pointer rounded-lg px-4 py-1.5 text-sm text-gray-700 dark:text-gray-200 border-none;
+}
+

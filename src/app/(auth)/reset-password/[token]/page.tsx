@@ -14,8 +14,8 @@ export default function ResetPasswordPage({
     return (
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
-          <CardTitle>Reset password</CardTitle>
-          <CardDescription>Enter new password.</CardDescription>
+          <CardTitle>Restablecer contraseña</CardTitle>
+          <CardDescription>Ingrese una nueva contraseña.</CardDescription>
         </CardHeader>
         <CardContent>
           
