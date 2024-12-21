@@ -28,7 +28,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
 						<UserButton />
 					</nav>
 				</header>
-				<div className="flex flex-1 flex-col gap-4 pt-6 p-4">
+				<div className="flex flex-1 flex-col overflow-hidden gap-4 pt-6 p-4">
 					{children}
 				</div>
 			</SidebarInset>

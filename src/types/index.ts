@@ -1,7 +1,8 @@
-import type { ColumnSort } from "@tanstack/react-table"
+import type { ColumnSort, Row } from "@tanstack/react-table"
 import { type filterSchema } from "@/lib/parsers"
 import { type z } from "zod"
-import { Icons } from "@/components/icons"
+import { type Icons } from "@/components/icons"
+import { DataTableConfig } from "@/config/data-table"
 
 export interface NavItem {
 	title: string
@@ -27,9 +28,11 @@ export interface FooterItem {
 	}[]
   }
   
-  export type MainNavItem = NavItemWithChildren
+export type MainNavItem = NavItemWithChildren
   
-  export type SidebarNavItem = NavItemWithChildren
+export type SidebarNavItem = NavItemWithChildren
+
+export type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
 
 export interface ProductFile {
 	id: string,
@@ -56,11 +59,18 @@ export interface ExtendedColumnSort<TData> extends Omit<ColumnSort, "id"> {
   
 export type ExtendedSortingState<TData> = ExtendedColumnSort<TData>[]
 
+export type ColumnType = DataTableConfig["columnTypes"][number]
+
 export interface DataTableFilterField<TData> {
 	id: StringKeyOf<TData>
 	label: string
 	placeholder?: string
 	options?: Option[]
+}
+
+export interface DataTableAdvancedFilterField<TData>
+  extends DataTableFilterField<TData> {
+  type: ColumnType
 }
 
 
@@ -69,3 +79,8 @@ export type Filter<TData> = Prettify<
     id: StringKeyOf<TData>
   }
 >
+
+export interface DataTableRowAction<TData> {
+	row: Row<TData>
+	type: "update" | "delete"
+}

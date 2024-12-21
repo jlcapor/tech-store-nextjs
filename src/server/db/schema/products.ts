@@ -18,6 +18,7 @@ import { subcategories } from './subcategories';
 import { productTags } from './tags';
 import { productVariants } from './variants';
 import { orderItems } from './orderItems';
+import { lifecycleDates } from './utils';
 
 export const productStatusEnum = pgEnum('product_status', [ 'active', 'draft', 'archived' ]);
 
@@ -43,6 +44,7 @@ export const products = pgTable(
 		inventory: integer('inventory').notNull().default(0),
 		rating: integer('rating').notNull().default(0),
 		status: productStatusEnum('status').notNull().default('active'),
+		...lifecycleDates,
 	},
 	(table) => ({
 		categoryIdIdx: index('products_category_id_idx').on(table.categoryId),
@@ -50,10 +52,7 @@ export const products = pgTable(
 	})
 );
 
-export const productImages = pgTable('product_images', {
-    id: varchar('id', { length: 30 }).$defaultFn(() => generateId()).primaryKey(),
-    name: text('description')
-})
+
 
 export const productsRelations = relations(products, ({ one, many }) => ({
 	category: one(categories, {

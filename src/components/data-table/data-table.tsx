@@ -11,30 +11,29 @@ import {
 } from "@/components/ui/table"
 
 import { DataTablePagination } from "./data-table-pagination"
+import { cn } from "@/lib/utils"
 
-interface DataTableProps<TData> {
+interface DataTableProps<TData> extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The table instance returned from useDataTable hook with pagination, sorting, filtering, etc.
    * @type TanstackTable<TData>
    */
   table: TanstackTable<TData>
-
-  /**
-   * The floating bar to render at the bottom of the table on row selection.
-   * @default null
-   * @type React.ReactNode | null
-   * @example floatingBar={<TasksTableFloatingBar table={table} />}
-   */
-  floatingBar?: React.ReactNode | null
 }
 
 export function DataTable<TData>({
   table,
-  floatingBar = null,
+  children,
+  className,
+  ...props
 }: DataTableProps<TData>) {
   return (
-    <div className="w-full space-y-2.5 overflow-auto">
-      <div className="rounded-md border">
+    <div 
+      className={cn("w-full space-y-2.5 overflow-auto", className)}
+      {...props}
+    >
+      {children}
+      <div className="overflow-hidden rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -86,7 +85,7 @@ export function DataTable<TData>({
       </div>
       <div className="flex flex-col gap-2.5">
         <DataTablePagination table={table} />
-        {table.getFilteredSelectedRowModel().rows.length > 0 && floatingBar}
+        {table.getFilteredSelectedRowModel().rows.length > 0}
       </div>
     </div>
   )

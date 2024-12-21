@@ -1,7 +1,6 @@
 'use client';
 
 import {
-	Command,
 	GalleryVerticalEnd,
 } from 'lucide-react';
 
@@ -40,8 +39,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 									<GalleryVerticalEnd className="size-4" />
 								</div>
 								<div className="flex flex-col gap-0.5 leading-none">
-									<span className="font-semibold">Documentation</span>
-									<span>v1.0.0</span>
+									<span className="font-semibold">TECH</span>
 								</div>
 							</Link>
 						</SidebarMenuButton>

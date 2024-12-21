@@ -43,6 +43,13 @@
       "when": 1734409204854,
       "tag": "0005_easy_katie_power",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1734724999668,
+      "tag": "0006_fixed_skreet",
+      "breakpoints": true
     }
   ]
 }
