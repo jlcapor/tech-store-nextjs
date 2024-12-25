@@ -32,7 +32,9 @@ export type MainNavItem = NavItemWithChildren
   
 export type SidebarNavItem = NavItemWithChildren
 
-export type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
+export interface SearchParams {
+	[key: string]: string | string[] | undefined
+}
 
 export interface ProductFile {
 	id: string,

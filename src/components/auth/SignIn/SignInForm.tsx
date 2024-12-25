@@ -15,11 +15,9 @@ import Link from 'next/link';
 import { authenticateAction } from '@/lib/actions/auth-action';
 import { CircleAlert } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useSession } from 'next-auth/react';
 
 export const SignInForm = () => {
 	const [error, setError] = React.useState<string | null>(null);
-	const [isSubmitted, setIsSubmitted] = React.useState(false)
   	const [isPending, startTransition] = React.useTransition();
   	const router = useRouter();
 

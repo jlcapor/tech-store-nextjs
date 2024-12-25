@@ -1,9 +1,6 @@
 import type { Metadata } from 'next';
-import { AppSidebar } from './_components/app-sidebar';
-import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { auth } from '@/server/auth';
 import { redirect } from 'next/navigation';
-import UserButton from './_components/user-button';
 
 export const metadata: Metadata = {
 	title: 'Dashboard',
@@ -13,25 +10,16 @@ export const metadata: Metadata = {
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
 	const session = await auth();
 	if (!session || session.user.role !== 'ADMIN') {
-		redirect("/")
+		redirect('/');
 	}
-	
+
 	return (
-		<SidebarProvider>
-			<AppSidebar />
-			<SidebarInset>
-				<header className="flex h-16 shrink-0 items-center justify-between border-b px-3">
-					<div className="flex items-center gap-2">
-						<SidebarTrigger />
-					</div>
-					<nav className="flex items-center space-x-4 ml-auto">
-						<UserButton />
-					</nav>
-				</header>
-				<div className="flex flex-1 flex-col overflow-hidden gap-4 pt-6 p-4">
-					{children}
-				</div>
-			</SidebarInset>
-		</SidebarProvider>
+		<div className="flex">
+			<div className="relative flex flex-1 flex-col lg:ml-64">
+				<main>
+					<div className="flex-1 overflow-hidden px-6 pt-6">{children}</div>
+				</main>
+			</div>
+		</div>
 	);
 }

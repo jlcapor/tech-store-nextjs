@@ -14,28 +14,6 @@ import { DataTableViewOptions } from "@/components/data-table/data-table-view-op
 interface DataTableToolbarProps<TData>
   extends React.HTMLAttributes<HTMLDivElement> {
   table: Table<TData>
-  /**
-   * An array of filter field configurations for the data table.
-   * When options are provided, a faceted filter is rendered.
-   * Otherwise, a search filter is rendered.
-   *
-   * @example
-   * const filterFields = [
-   *   {
-   *     id: 'name',
-   *     label: 'Name',
-   *     placeholder: 'Filter by name...'
-   *   },
-   *   {
-   *     id: 'status',
-   *     label: 'Status',
-   *     options: [
-   *       { label: 'Active', value: 'active', icon: ActiveIcon, count: 10 },
-   *       { label: 'Inactive', value: 'inactive', icon: InactiveIcon, count: 5 }
-   *     ]
-   *   }
-   * ]
-   */
   filterFields?: DataTableFilterField<TData>[]
 }
 
@@ -47,7 +25,6 @@ export function DataTableToolbar<TData>({
   ...props
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
-
   // Memoize computation of searchableColumns and filterableColumns
   const { searchableColumns, filterableColumns } = React.useMemo(() => {
     return {
@@ -55,6 +32,8 @@ export function DataTableToolbar<TData>({
       filterableColumns: filterFields.filter((field) => field.options),
     }
   }, [filterFields])
+
+
 
   return (
     <div

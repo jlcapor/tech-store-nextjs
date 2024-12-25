@@ -14,10 +14,6 @@ import { DataTablePagination } from "./data-table-pagination"
 import { cn } from "@/lib/utils"
 
 interface DataTableProps<TData> extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * The table instance returned from useDataTable hook with pagination, sorting, filtering, etc.
-   * @type TanstackTable<TData>
-   */
   table: TanstackTable<TData>
 }
 
@@ -85,7 +81,6 @@ export function DataTable<TData>({
       </div>
       <div className="flex flex-col gap-2.5">
         <DataTablePagination table={table} />
-        {table.getFilteredSelectedRowModel().rows.length > 0}
       </div>
     </div>
   )

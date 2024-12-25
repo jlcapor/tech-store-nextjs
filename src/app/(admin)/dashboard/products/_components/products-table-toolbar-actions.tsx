@@ -1,8 +1,7 @@
 "use client"
 
-import { type Product } from "@/server/db/schema"
 import { type Table } from "@tanstack/react-table"
-import { Download, X } from "lucide-react"
+import { X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { AwaitedProduct } from "./products-table"
@@ -31,24 +30,16 @@ export function ProductsTableToolbarActions({
           <X className="size-4" aria-hidden="true" />
           Clear selection
         </Button>
-        {/**
-         * Other actions can be added here.
-         * For example, delete, mark as complete, etc.
-         */}
        </>
       ) : null}
-      <Button
+      <div className="flex items-center space-x-2">
+        <Button 
         variant="outline"
-        size="sm"
-        className="gap-2"
-      >
-        <Download className="size-4" aria-hidden="true" />
-        Export
-      </Button>
-      {/**
-       * Other actions can be added here.
-       * For example, import, view, etc.
-       */}
+          size="sm"  
+          className="h-8 px-2 lg:px-3">
+          Add Payment
+        </Button>
+      </div>
     </div>
   )
 }
