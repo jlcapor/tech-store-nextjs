@@ -74,9 +74,6 @@
   }
 }
 
-
-
-
 @layer components {
   .zoom-image [data-rmiz-modal-overlay="visible"] {
     @apply bg-background/10 backdrop-blur;
@@ -84,6 +81,16 @@
 
   .zoom-image [data-rmiz-modal-img] {
     @apply rounded-md lg:rounded-2xl;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 }
 
@@ -102,4 +109,6 @@
 .menu-item {
   @apply m-2 cursor-pointer rounded-lg px-4 py-1.5 text-sm text-gray-700 dark:text-gray-200 border-none;
 }
+
+
 

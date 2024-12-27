@@ -1,6 +1,5 @@
 'use client';
 import * as React from 'react';
-import { type DataTableRowAction } from '@/types';
 import { type ColumnDef } from '@tanstack/react-table';
 
 import { formatDate, formatPrice } from '@/lib/utils';

@@ -18,7 +18,7 @@ import {
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { Product } from '@/server/db/schema';
-import { DataTableFilterField, DataTableRowAction } from '@/types';
+import { DataTableFilterField } from '@/types';
 import { getColumns } from './products-table-columns';
 import { DataTable } from '@/components/data-table/data-table';
 import { z } from 'zod';
@@ -61,7 +61,7 @@ export function ProductsTable({ promise }: ProductsTableProps) {
 
       for (const [key, value] of Object.entries(params)) {
         if (value === null) {
-          newSearchParams.delete(key)
+          newSearchParams.delete(key) 
         } else {
           newSearchParams.set(key, String(value))
         }
@@ -83,7 +83,10 @@ export function ProductsTable({ promise }: ProductsTableProps) {
   });
 
   const pagination = React.useMemo(
-    () => ({ pageIndex, pageSize }),
+    () => ({
+      pageIndex,
+      pageSize,
+    }),
     [pageIndex, pageSize]
   );
 
@@ -167,7 +170,7 @@ export function ProductsTable({ promise }: ProductsTableProps) {
   return (
     <DataTable table={table}>
       <DataTableToolbar table={table} filterFields={filterFields}>
-            <ProductsTableToolbarActions table={table}/>
+        <ProductsTableToolbarActions table={table}/>
       </DataTableToolbar>
     </DataTable>
   );

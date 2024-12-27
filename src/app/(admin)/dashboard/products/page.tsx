@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { type SearchParams } from "@/types"
-
+import { api } from "@/trpc/server";
 import { type Metadata } from 'next';
 import { env } from '@/env';
 import { ProductsTable } from './_components/products-table';
