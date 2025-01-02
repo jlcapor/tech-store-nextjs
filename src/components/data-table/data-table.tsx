@@ -17,7 +17,7 @@ interface DataTableProps<TData> extends React.HTMLAttributes<HTMLDivElement> {
   table: TanstackTable<TData>
 }
 
-export function DataTable<TData>({
+export function DataTable<TData, TValue>({
   table,
   children,
   className,

@@ -84,31 +84,14 @@
   }
 }
 
-@layer utilities {
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
-}
-
 @media (max-width: 640px) {
   .container {
-    @apply px-4;
-    /* @apply max-w-[1440px] w-full mx-auto px-6; */
+    /* @apply px-4; */
+    @apply max-w-[1440px] w-full mx-auto px-6;
   }
 
 }
 
-.dropdown-active {
-  @apply bg-gray-100 dark:bg-gray-800;
-}
-
-.menu-item {
-  @apply m-2 cursor-pointer rounded-lg px-4 py-1.5 text-sm text-gray-700 dark:text-gray-200 border-none;
-}
 
 
 

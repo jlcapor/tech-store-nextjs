@@ -25,14 +25,12 @@ export function DataTableToolbar<TData>({
   ...props
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
-  // Memoize computation of searchableColumns and filterableColumns
   const { searchableColumns, filterableColumns } = React.useMemo(() => {
     return {
       searchableColumns: filterFields.filter((field) => !field.options),
       filterableColumns: filterFields.filter((field) => field.options),
     }
   }, [filterFields])
-
 
 
   return (
@@ -72,7 +70,7 @@ export function DataTableToolbar<TData>({
                 <DataTableFacetedFilter
                   key={String(column.id)}
                   column={table.getColumn(column.id ? String(column.id) : "")}
-                  title={column.label}
+                  title={column.id}
                   options={column.options ?? []}
                 />
               )

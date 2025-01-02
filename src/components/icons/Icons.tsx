@@ -5,7 +5,9 @@ import {
 	Settings,
 	LogOut,
 	LayoutDashboard,
-	Box  
+	Box,
+	X,
+	Image 
 } from 'lucide-react';
 
 
@@ -108,5 +110,8 @@ export const Icons = {
 	settings : Settings,
 	logout: LogOut,
 	dashboard: LayoutDashboard,
-	cube: Box
+	cube: Box,
+	x: X,
+	placeholder: Image,
+
 };

@@ -59,7 +59,7 @@ export  function AuthDropdown({ session, className, ...props }: AuthDropdownProp
         <DropdownMenuGroup>
           {session.user.role === "ADMIN" ? (
             <DropdownMenuItem asChild>
-              <Link href="/dashboard" className="flex items-center space-x-2.5">
+              <Link href="/admin/overview" className="flex items-center space-x-2.5">
                 <LayoutDashboardIcon className="size-5" />
                 <p className="text-sm">Dashboard</p>
               </Link>

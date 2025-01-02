@@ -1,6 +1,4 @@
 import type { ColumnSort, Row } from "@tanstack/react-table"
-import { type filterSchema } from "@/lib/parsers"
-import { type z } from "zod"
 import { type Icons } from "@/components/icons"
 import { DataTableConfig } from "@/config/data-table"
 
@@ -37,7 +35,7 @@ export interface SearchParams {
 }
 
 export interface ProductFile {
-	id: string,
+	id: string
 	name: string
 	url: string
 }
@@ -76,11 +74,6 @@ export interface DataTableAdvancedFilterField<TData>
 }
 
 
-export type Filter<TData> = Prettify<
-  Omit<z.infer<typeof filterSchema>, "id"> & {
-    id: StringKeyOf<TData>
-  }
->
 
 export interface DataTableRowAction<TData> {
 	row: Row<TData>

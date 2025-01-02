@@ -18,8 +18,9 @@ export default function MobileNav() {
 		<Sheet open={open} onOpenChange={setOpen}>
 			<SheetTrigger asChild>
 				<Button
-					variant="ghost"
-					className="-ml-2 mr-2 h-8 w-8 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 lg:hidden"
+				    size="icon"
+					variant="outline"
+					className="mr-2 h-8 w-8 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 lg:hidden"
 				>
 					<Icons.menu className="size-5 text-muted-foreground" aria-hidden="true" />
 					<span className="sr-only">Toggle Menu</span>
