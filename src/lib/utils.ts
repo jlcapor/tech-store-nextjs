@@ -1,4 +1,4 @@
-import { ReadonlyURLSearchParams } from "next/navigation"
+import { type ReadonlyURLSearchParams } from "next/navigation"
 import { env } from "@/env"
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"

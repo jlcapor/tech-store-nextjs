@@ -4,9 +4,9 @@ import { db } from '@/server/db';
 import { products } from '@/server/db/schema';
 import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
-import { CreateProductInput } from '../validations/product';
+import { type CreateProductInput } from '../validations/product';
 import { getErrorMessage } from '@/lib/handle-error';
-import { ProductFile } from '@/types';
+import { type ProductFile } from '@/types';
 
 export async function createProduct(input: CreateProductInput) {
     try {
@@ -59,13 +59,3 @@ export async function deleteProduct(input: { id: string }) {
     }
 }
 
-export async function deleteProducts(input: { ids: string[] }) {
-    try {
-        
-    } catch (error) {
-        return {
-            data: null,
-            error: getErrorMessage(error),
-        };
-    }
-}

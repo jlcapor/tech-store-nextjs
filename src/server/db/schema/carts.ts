@@ -1,4 +1,4 @@
-import { boolean, json, pgTable, text, varchar } from "drizzle-orm/pg-core"
+import { pgTable, varchar } from "drizzle-orm/pg-core"
 
 import { generateId } from "@/lib/id"
 

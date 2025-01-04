@@ -3,7 +3,7 @@ import 'server-only';
 import { categories, products, type Product } from '@/server/db/schema';
 import { db } from '@/server/db';
 import { and, asc, desc, eq, gte, like, lte, sql } from 'drizzle-orm';
-import { ProductsSearchParams } from '../validations/params';
+import { type ProductsSearchParams } from '../validations/params';
 
 export const ITEMS_PER_PAGE = 10;
 

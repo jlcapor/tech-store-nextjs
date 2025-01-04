@@ -1,5 +1,5 @@
 import { type User } from "next-auth";
-import { JWT } from "next-auth/jwt";
+import { type JWT } from "next-auth/jwt";
 
 export type UserRoleType = 'ADMIN' | 'USER';
 

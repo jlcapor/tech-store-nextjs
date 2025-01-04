@@ -3,9 +3,9 @@
 import { signIn } from '@/server/auth';
 import { db } from '@/server/db';
 import { AuthError } from 'next-auth';
-import { loginSchema, signupSchema } from '../validations/auth';
+import { type loginSchema, signupSchema } from '../validations/auth';
 import { users } from '@/server/db/schema';
-import { z } from 'zod';
+import type { z } from 'zod';
 import bcrypt from 'bcrypt';
 
 

@@ -1,4 +1,4 @@
-import { Session } from 'next-auth';
+import { type Session } from 'next-auth';
 import { Suspense } from 'react';
 import Link from 'next/link';
 

@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button, ButtonProps } from '@/components/ui/button'
+import { Button, type ButtonProps } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import Link from 'next/link'
 import { Icons } from '@/components/icons'
-import { Session } from 'next-auth'
+import { type Session } from 'next-auth'
 import { cn } from '@/lib/utils'
 import { Heart, LayoutDashboardIcon } from 'lucide-react'
 import { SignOut } from './sing-out'

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { SidebarNavItem } from '@/types';
+import { type SidebarNavItem } from '@/types';
 import { Icons } from '@/components/icons';
 import { cn } from '@/lib/utils';
 

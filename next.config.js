@@ -9,13 +9,14 @@ const config = {
    
     images: {
         remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'utfs.io',
-                port: '',
-            },
-        ]
-    }
+          {
+            protocol: "https",
+            hostname: "utfs.io",
+            pathname: '/f/**',
+          },
+        ],
+        unoptimized: true,
+      },
 };
 
 export default config;

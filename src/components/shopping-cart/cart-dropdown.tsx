@@ -7,7 +7,7 @@ import { ShoppingCart } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 const CartDropdown = () => {
-  const timerRef = React.useRef<NodeJS.Timeout>();
+  const timerRef = React.useRef<NodeJS.Timeout | null>(null);
 
   const [activeTimer, setActiveTimer] = React.useState<NodeJS.Timeout | undefined>(
     undefined

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { auth } from '@/server/auth';
 import { redirect } from 'next/navigation';
-import DashboardSidebar from './_components/dashboard-sidebar';
-import DashboardHeader from './_components/dashboard-header';
+import DashboardSidebar from '../../components/admin/dashboard/dashboard-sidebar';
+import DashboardHeader from '../../components/admin/dashboard/dashboard-header';
 import { SidebarProvider } from '@/context/sidebar-context';
 
 export const metadata: Metadata = {

@@ -1,10 +1,8 @@
-import type { ProductFile } from '@/types';
 import { relations } from 'drizzle-orm';
 import { 
 	decimal, 
 	index, 
 	integer, 
-	json, 
 	pgEnum, 
 	pgTable, 
 	text, 
@@ -19,6 +17,8 @@ import { productTags } from './tags';
 import { productVariants } from './variants';
 import { orderItems } from './orderItems';
 import { lifecycleDates } from './utils';
+import { productImages } from './productImages';
+
 
 export const productStatusEnum = pgEnum('product_status', [ 'active', 'draft', 'archived' ]);
 
@@ -28,7 +28,6 @@ export const products = pgTable(
 		id: varchar('id', { length: 30 }).$defaultFn(() => generateId()).primaryKey(), // prefix_ + nanoid (12)
 		name: text('name').notNull(),
 		description: text('description'),
-        images: json("images").$type<ProductFile[] | null>().default(null),
 		categoryId: varchar('category_id', { length: 30 })
 			.references(() => categories.id, { onDelete: 'cascade' })
 			.notNull(),
@@ -63,6 +62,7 @@ export const productsRelations = relations(products, ({ one, many }) => ({
 		fields: [ products.subcategoryId ],
 		references: [ subcategories.id ],
 	}),
+	imageProducts: many(productImages, { relationName: 'productImages' }),
 	variants: many(productVariants, { relationName: 'productVariants' }),
 	tags: many(productTags, { relationName: 'productTags' }),
 	ordersItems: many(orderItems, { relationName: 'orderProducts' })

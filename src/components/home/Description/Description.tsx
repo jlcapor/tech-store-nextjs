@@ -1,1 +1,0 @@
-//https://medium.com/openalternative/top-5-open-source-projects-for-developers-in-2024-0eba45ab74ae

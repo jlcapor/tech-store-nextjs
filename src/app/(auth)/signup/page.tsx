@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import { type Metadata } from 'next';
 import { SignUpForm } from '@/components/auth/SignUp';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { OAuthSignIn } from '@/components/auth/OAuthSignIn';

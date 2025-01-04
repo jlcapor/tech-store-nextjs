@@ -8,7 +8,7 @@ import React, { useEffect, useCallback, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Icons } from '@/components/icons';
 import { useSelectedLayoutSegments } from 'next/navigation';
-import { SidebarNavItem } from '@/types';
+import { type SidebarNavItem } from '@/types';
 import SidebarItem from './sidebar-Item';
 import { SidebarNav } from '@/components/layout/sidebar-nav';
 import { ScrollArea } from '@/components/ui/scroll-area';

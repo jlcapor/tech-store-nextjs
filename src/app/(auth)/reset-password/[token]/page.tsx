@@ -6,11 +6,7 @@ export const metadata = {
 	description: 'Reset Password Page',
 };
 
-export default function ResetPasswordPage({
-    params,
-  }: {
-    params: { token: string };
-  }) {
+export default function ResetPasswordPage() {
     return (
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
